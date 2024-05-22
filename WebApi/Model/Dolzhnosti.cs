@@ -3,13 +3,11 @@ using System.Collections.Generic;
 
 namespace WebApi.Model;
 
-public partial class User
+public partial class Dolzhnosti
 {
-    public int IdUser { get; set; }
+    public int IdDolzhnosti { get; set; }
 
-    public string Login { get; set; }
-
-    public string Parol { get; set; }
+    public string NazvanieDolzhnosti { get; set; }
 
     public virtual ICollection<Sotrudniki> Sotrudnikis { get; set; } = new List<Sotrudniki>();
 }
