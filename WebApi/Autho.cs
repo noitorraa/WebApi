@@ -7,21 +7,26 @@ namespace WebApi
     
     public class Autho
     {
-        public User user = new User();
-        public void Authorization(string login, string password)
+        public string Authorization(string login, string password)
         {
-            //Scaffold-DbContext "data source=DESKTOP-TEQ035O;initial catalog=MyBase;persist security info=True;user id=Noitorra;password=Passw0rd;trustservercertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
-            //User user = new User();
+            User user = new User();
             string Pass = HashPassword(password);
-            Console.WriteLine(Pass);
             user = MyBaseContext.GetContext().Users.Where(p => p.Login == login && p.Parol == Pass).FirstOrDefault();
             if (user != null)
             {
-                Console.WriteLine("Доброо пожаловать "+user.Login+"!");
+                Sotrudniki sotr = new Sotrudniki();
+                sotr = MyBaseContext.GetContext().Sotrudnikis.Where(p => p.IdUser == user.IdUser).FirstOrDefault();
+
+                Console.WriteLine("***************************************************************************");
+                Console.WriteLine("Добро пожаловать, "+user.Login+"!");
+                Console.WriteLine(sotr.Imea+" "+sotr.Familia+" "+sotr.Otchestvo);
+                Console.WriteLine("***************************************************************************");
+                return "Вы успешно авторизовались! Вас зовут "+sotr.Imea+" "+sotr.Familia+" "+sotr.Otchestvo+", ваш номер телефона "+sotr.Telephon;
             }
             else
             {
                 Console.WriteLine("Не получилось войти в аккаунт!");
+                return null;
             }
         }
         public static string HashPassword(string password)

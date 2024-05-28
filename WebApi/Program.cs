@@ -5,7 +5,6 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 var builder = WebApplication.CreateBuilder(args);
-//string connection = "data source=localhost; initial catalog = MyBase; Integrated Security=True; trustservercertificate = True";
 string connection = "Server=localhost;Database=MyBase;User=Noitorra;Password=Passw0rd;trustservercertificate=True";
 builder.Services.AddDbContext<MyBaseContext>(options => options.UseSqlServer(connection));
 builder.Services.AddControllers();
